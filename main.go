@@ -13,7 +13,6 @@ func main() {
 
 func renderFile() {
 	var r, g, b float64
-	var ir, ig, ib int
 
 	// use string builder for efficient concatenation of strings https://pkg.go.dev/strings#Builder
 	var fileContent strings.Builder
@@ -25,11 +24,8 @@ func renderFile() {
 			g = float64(j) / (height - 1)
 			b = 0.25
 
-			ir = int(255.999 * r)
-			ig = int(255.999 * g)
-			ib = int(255.999 * b)
-
-			fileContent.WriteString(fmt.Sprintf("%d %d %d\n", ir, ig, ib))
+			vec := Vector{X: r, Y: g, Z: b}
+			vec.writeColor(&fileContent)
 		}
 	}
 
